@@ -118,6 +118,7 @@ func (h *Handler) RegisterMeshmodelRelationships(rw http.ResponseWriter, r *http
 			writeMeshkitError(rw, ErrRequestBody(err), http.StatusBadRequest)
 			return
 		}
+		helpers.NormalizeRelationshipDefinition(&r)
 		isRegistranError, isModelError, err = h.registryManager.RegisterEntity(cc.Connection, &r)
 		helpers.HandleError(registry.RegistrantHostToV1beta1(cc.Connection), &r, err, isModelError, isRegistranError)
 	}
